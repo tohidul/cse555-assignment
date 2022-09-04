@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product Information</title>
+</head>
+<body>
+
+    <form method="post" action="{{ url_for('updateProduct') }}">
+        <label for="productID">Product ID:</label><br>
+        <input type="text" name="productID" value="{{ product['productID'] }}"><br>
+        <label for="productName">Product Name:</label><br>
+        <input type="text" name="productName" value="{{ product['productName'] }}"><br>
+        <label for="supplierName">Supplier Name:</label><br>
+        <input type="text" name="supplierName" value="{{ product['supplierName'] }}"><br>
+        <label for="productCategory">Product Category:</label><br>
+        <input type="text" name="productCategory" value="{{ product['productCategory'] }}"><br>
+        <label for="quantityPerUnit " >Quantity Per Unit:</label><br>
+        <input type="text" name="quantityPerUnit" value="{{ product['quantityPerUnit'] }}"><br>
+        <label for="unitPrice " >Unit Price:</label><br>
+        <input type="text" name="unitPrice" value="{{ product['unitPrice'] }}"><br>
+        <label for="numberOfUnitAvailable " >Product ID:</label><br>
+        <input type="text" name="numberOfUnitAvailable" value="{{ product['numberOfUnitAvailable'] }}"><br>
+        <input type="submit" name="Update"></input>
+    </form>
+
+</body>
+</html>

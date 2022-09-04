@@ -23,12 +23,29 @@ class Product:
             productDict["quantityPerUnit"] = getattr(product, "quantityPerUnit", "")
             productDict["unitPrice"] = getattr(product, "unitPrice", "")
             productDict["numberOfUnitAvailable"] = getattr(product, "numberOfUnitAvailable", "")
-            dataList.append(productDict)
+            dataList.append(product)
 
         return dataList
 
+    def getDataByProductID(self, productID):
+        for product in self.productCollection.find():
+            productDict = {}
+            if(productID == int(getattr(product, "productID", ""))):
+                productDict["productID"] = getattr(product, "productID", "")
+                productDict["productName"] = getattr(product, "productName", "")
+                productDict["supplierName"] = getattr(product, "supplierName", "")
+                productDict["productCategory"] = getattr(product, "productCategory", "")
+                productDict["quantityPerUnit"] = getattr(product, "quantityPerUnit", "")
+                productDict["unitPrice"] = getattr(product, "unitPrice", "")
+                productDict["numberOfUnitAvailable"] = getattr(product, "numberOfUnitAvailable", "")
+                return productDict
+
+
     def insertData(self, dataDictionary):
         return self.productCollection.insert_one(dataDictionary).inserted_id
+
+    def updateData(self, myQuery, newValues):
+        self.productCollection.update_one(myQuery, newValues)
 
 
 
