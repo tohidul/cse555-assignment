@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<style>
+    th, td {
+        border: 1px solid;
+        border-radius: 10px;
+        border-color: #655fc9;
+        padding: 15px;
+    }
+    tr.noBorder td {
+      border: 0;
+    }
+    .center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+</style>
+<body>
+    <table class="center">
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Supplier Name</th>
+            <th>Product Category</th>
+            <th>Quantity Per Unit</th>
+            <th>Unit Price</th>
+            <th>Number of Unit Available</th>
+            <th>Action</th>
+        </tr>
+        {% for product in products %}
+            <tr>
+                <td>{{ product['productID'] }}</td>
+                <td>{{ product['productName'] }}</td>
+                <td>{{ product['supplierName'] }}</td>
+                <td>{{ product['productCategory'] }}</td>
+                <td>{{ product['quantityPerUnit'] }}</td>
+                <td>{{ product['unitPrice'] }}</td>
+                <td>{{ product['numberOfUnitAvailable'] }}</td>
+                <td>
+                   <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a>
+                            <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+
+                    <a href={{ url_for('editProduct', productID=product['productID']) }} data-toggle="modal" data-target="#modaledit{{row.id}}">
+                        <img src='static/edit-icon.png' alt="'html", style="width:32px;height:32px;">
+                    </a>
+                    <a href={{ url_for('deleteProduct', productID=product['productID']) }}>
+                        <img src='static/delete-icon.png' alt="'html", style="width:32px;height:32px;">
+                    </a>
+                </td>
+            </tr>
+            <div id="modaledit{{ product['productID'] }}" class="modal fade" role="dialog">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h4 class="modal-title">Update Information</h4>
+                     </div>
+                     <div class="modal-body">
+                        <form action="{{url_for('update')}}" method="POST">
+                           <div class="form-group">
+                              <label>Product ID:</label>
+                               <input type="hidden"  name="id" value="{{row.id}}">
+
+                              <input type="text" class="form-control" name="name" value="{{row.name}}">
+
+                           </div>
+
+                           <div class="form-group">
+                              <label>Product Name:</label>
+                              <input type="text" class="form-control" name="productName" value="{{ product['productName'] }}">
+                           </div>
+
+
+                           <div class="form-group">
+                              <label>Supplier Name:</label>
+                              <input type="text" class="form-control" name="phone" value="{{ product['supplierName'] }}">
+                           </div>
+
+                            <div class="form-group">
+                              <label>Product Category:</label>
+                              <input type="text" class="form-control" name="phone" value="{{ product['productCategory'] }}">
+                            </div>
+
+                            <div class="form-group">
+                              <label>Product Category:</label>
+                              <input type="text" class="form-control" name="phone" value="{{ product['quantityPerUnit'] }}">
+                            </div>
+                            <div class="form-group">
+                              <label>Unit Price:</label>
+                              <input type="text" class="form-control" name="phone" value="{{ product['unitPrice'] }}">
+                            </div>
+                            <div class="form-group">
+                              <label>Number of Unit Available:</label>
+                              <input type="text" class="form-control" name="phone" value="{{ product['numberOfUnitAvailable'] }}">
+                            </div>
+
+
+                           <div class="form-group">
+
+
+                              <button class="btn btn-primary" type="submit">Update</button>
+
+
+                           </div>
+
+
+                        </form>
+
+
+                     </div>
+
+
+                     <div class="modal-footer">
+
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+                     </div>
+
+
+                  </div>
+
+
+               </div>
+
+            </div>
+        {% endfor %}
+        <tr class="noBorder">
+            <td colspan="8" style="text-align:right;">
+                <a href={{ url_for('createProduct') }}>
+                        <img src='static/create-icon.png' alt="'html", style="width:32px;height:32px;">
+                </a>
+            </td>
+        </tr>
+    </table>
+    {% block createProduct %}{% endblock %}
+</body>
+{% block script %} {% endblock %}
+</html>
