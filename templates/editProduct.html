@@ -2,27 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Product Information</title>
+    <title>Create A Product</title>
+
+    <style>
+    th, td {
+        border: 1px solid;
+        border-radius: 10px;
+        border-color: #1b47a6;
+        padding: 15px;
+    }
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 100px;
+    }
+    .button1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #4CAF50;
+    }
+
+    .button1:hover {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+</style>
+
 </head>
 <body>
+    <form method="post" action="{{ url_for('editProduct', productID = product['productID']) }}">
+        <table class="center">
+            <tr>
+                <th>Product Description</th>
+                <th>Values</th>
+            </tr>
+            <tr>
+                <td><label for="productID">Product ID:</label></td>
+                <td><input type="text" name="productID" value="{{ product['productID'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="productName">Product Name:</label></td>
+                <td><input type="text" name="productName" value="{{ product['productName'] }}"></td>
+            </tr>
+                <td><label for="supplierName">Supplier Name:</label></td>
+                <td><input type="text" name="supplierName" value="{{ product['supplierName'] }}"></td>
+            <tr>
+            <tr>
+                <td><label for="productCategory">Product Category:</label></td>
+                <td><input type="text" name="productCategory" value="{{ product['productCategory'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="quantityPerUnit">Quantity Per Unit:</label></td>
+                <td><input type="text" name="quantityPerUnit" value="{{ product['quantityPerUnit'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="unitPrice " >Unit Price:</label></td>
+                <td><input type="number", step="any" name="unitPrice" value="{{ product['unitPrice'] }}"></td>
+            </tr>
+            <tr>
+                <td><label for="numberOfUnitAvailable " >Number of Unit Available:</label><br></td>
+                <td><input type="number" name="numberOfUnitAvailable" value="{{ product['numberOfUnitAvailable'] }}"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right"><button type="submit" class="button1">Update</button></td>
+            </tr>
+        </table>
 
-    <form method="post" action="{{ url_for('updateProduct') }}">
-        <label for="productID">Product ID:</label><br>
-        <input type="text" name="productID" value="{{ product['productID'] }}"><br>
-        <label for="productName">Product Name:</label><br>
-        <input type="text" name="productName" value="{{ product['productName'] }}"><br>
-        <label for="supplierName">Supplier Name:</label><br>
-        <input type="text" name="supplierName" value="{{ product['supplierName'] }}"><br>
-        <label for="productCategory">Product Category:</label><br>
-        <input type="text" name="productCategory" value="{{ product['productCategory'] }}"><br>
-        <label for="quantityPerUnit " >Quantity Per Unit:</label><br>
-        <input type="text" name="quantityPerUnit" value="{{ product['quantityPerUnit'] }}"><br>
-        <label for="unitPrice " >Unit Price:</label><br>
-        <input type="text" name="unitPrice" value="{{ product['unitPrice'] }}"><br>
-        <label for="numberOfUnitAvailable " >Product ID:</label><br>
-        <input type="text" name="numberOfUnitAvailable" value="{{ product['numberOfUnitAvailable'] }}"><br>
-        <input type="submit" name="Update"></input>
+
     </form>
-
 </body>
 </html>
