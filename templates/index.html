@@ -42,8 +42,8 @@
                     <a href={{ url_for('editProduct', productID=product['productID']) }}>
                         <img src='/static/edit-icon.png' alt='edit', style="width:32px;height:32px;">
                     </a>
-                    <a href={{ url_for('deleteProduct', productID=product['productID']) }} onclick="confirmDelete()">
-                        <img src='/static/delete-icon.png' alt="'delete", style="width:32px;height:32px;">
+                    <a href={{ url_for('deleteProductConfirmation', productID=product['productID']) }}>
+                        <img src='/static/delete-icon.png' alt='delete', style="width:32px;height:32px;">
                     </a>
                 </td>
             </tr>
@@ -58,16 +58,6 @@
             </tr>
     </table>
 
-<script>
-    function confirmDelete() {
-        if(confirm("Are you sure you want to delete?") == true){
-            document.getElementById("shouldDelete").value = "True";
-        }
-        else{
-            document.getElementById("shouldDelete").value = "False";
-        }
-    }
-</script>
 
 </body>
 </html>

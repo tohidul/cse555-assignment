@@ -44,12 +44,21 @@ def editProduct(productID):
         return redirect("/")
 
 
+@app.route('/product/deleteProductConfirmation/<productID>', methods=["GET"])
+def deleteProductConfirmation(productID):
+    if(request.method=="GET"):
+        productDict = db.getDataByProductID(productID)
+        return render_template("deleteProductConfirmation.html", product=productDict)
+    else:
+        return "GET Product ID"+request.form.get("shouldDelete")
+
+
 @app.route('/product/delete/<productID>', methods=["GET", "POST"])
 def deleteProduct(productID):
     if(request.method=="POST"):
-        return "productID"
-    else:
-        return "GET Product ID"+request.form.get("shouldDelete")
+        db.deleteByID(productID)
+        return redirect("/")
+
 
 
 @app.route('/product/createProduct', methods=['GET', 'POST'])

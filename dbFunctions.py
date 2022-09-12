@@ -57,3 +57,11 @@ class Product:
         if (self.productCollection.count_documents({'productID': productID}, limit=1)) != 0:
             return True
         return False
+
+    def deleteByID(self, productID):
+        try:
+            self.productCollection.delete_one({"productID": productID})
+        except:
+            return False
+
+        return True
